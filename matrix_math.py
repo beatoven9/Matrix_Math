@@ -1,26 +1,27 @@
 #!/usr/bin/env python
 
-# you should make a function that creates an identity matrix of dimensions 'dimensions'
-
 import vector_math as Vector
 
 class Matrix:
 
     def __init__(self, dimensions=[1, 1], elements=None, identity=False, zero=False):
         
-#        if dimensions == [1, 1] and elements == None and identity==False and zero==False:
-#            self.query_elements()
-#        elif identity == True:
-#            print('creating identity matrix')
-#            self.create_identity_matrix()
-#        elif zero == True:
-#            self.create_zero_matrix()
-#        else:
-#            self.set_elements(elements)
-        self.create_identity_matrix()
+        if dimensions == [1, 1] and elements == None and identity==False and zero==False:
+            self.query_elements()
+            self.refresh_matrix()
+        elif identity == True:
+            print('creating identity matrix')
+            self.create_identity_matrix()
+        elif zero == True:
+            self.dimensions = dimensions
+            self.create_zero_matrix()
+        else:
+            print('what kind of matrix are you making?')
+        
+        
 
     def query_elements(self):
-        rows, columns = [int(dimension) for dimension in input('Input the dimensions of the matrix in "row, column" format: ').split(', ')]  
+        rows, columns = [int(dimension) for dimension in input('Input the dimensions of the matrix in "rows, columns" format: ').split(', ')]  
         matrix = []
         self.dimensions = [rows, columns]
         self.set_default_vals()
@@ -104,7 +105,8 @@ class Matrix:
         self.dimensions = [rows, columns]
 
     def create_zero_matrix(self):
-        self.query_dimensions()
+        if self.dimensions == [1,1]:
+            self.query_dimensions() 
         self.set_default_vals()
         self.set_rows()
         self.set_columns()
@@ -123,7 +125,7 @@ def multiply_matrices(matrix_a, matrix_b):
     if matrix_a.dimensions[1] != matrix_b.dimensions[0]:
         print("ERROR: these matrices are not compatible for multiplication.\n")
         return
-    product_matrix = Matrix(dimensions=[matrix_a.dimensions[1], matrix_b.dimensions[0]])
+    product_matrix = Matrix(dimensions=[matrix_a.dimensions[1], matrix_b.dimensions[0]], zero=True)
     
     for i in range(len(product_matrix.rows)):
         for j in range(len(product_matrix.columns)):
@@ -132,7 +134,15 @@ def multiply_matrices(matrix_a, matrix_b):
     return product_matrix
 
 if __name__ == '__main__':
-    new_matrix = Matrix(identity=True, zero=False)
+    new_matrix = Matrix()
 
+    second_matrix = Matrix()
+    print()
+    second_matrix.print_matrix()
     print()
     new_matrix.print_matrix()
+    print()
+    second_matrix.refresh_matrix()
+    new_matrix.refresh_matrix()
+    product_matrix = multiply_matrices(new_matrix, second_matrix)
+    product_matrix.print_matrix()
