@@ -1,13 +1,22 @@
 #!/usr/bin/env python
 
+#def dot_product(vect_a, vect_b):
+#    if len(vect_a) != len(vect_b):
+#        print("error: vectors must be of equal length to find dot product")
+#        return 0
+#    dot_product = [0] * len(vect_a)
+#    for i in range(len(vect_a)):
+#        for j in range(len(vect_b)):
+#            dot_product[i] += vect_a[i] * vect_b[j]
+#    return dot_product
+
 def dot_product(vect_a, vect_b):
     if len(vect_a) != len(vect_b):
         print("error: vectors must be of equal length to find dot product")
         return 0
-    dot_product = [0] * len(vect_a)
+    dot_product = 0
     for i in range(len(vect_a)):
-        for j in range(len(vect_b)):
-            dot_product[i] += vect_a[i] * vect_b[j]
+        dot_product += (vect_a[i] * vect_b[i])
     return dot_product
 
 def add_vectors(vect_a, vect_b):

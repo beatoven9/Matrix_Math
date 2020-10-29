@@ -125,11 +125,13 @@ def multiply_matrices(matrix_a, matrix_b):
     if matrix_a.dimensions[1] != matrix_b.dimensions[0]:
         print("ERROR: these matrices are not compatible for multiplication.\n")
         return
-    product_matrix = Matrix(dimensions=[matrix_a.dimensions[1], matrix_b.dimensions[0]], zero=True)
+    product_matrix = Matrix(dimensions=[len(matrix_a.rows), len(matrix_b.columns)], zero=True)
     
-    for i in range(len(product_matrix.rows)):
-        for j in range(len(product_matrix.columns)):
-            product_matrix.elements[i] = Vector.dot_product(matrix_a.rows[i], matrix_b.columns[j])
+    for i in range(0, len(matrix_a.rows)):
+        print("working in ", matrix_a.rows[i])
+        for j in range(0, len(matrix_b.columns)):
+            print("dotproduct calculation", matrix_a.rows[i], "*", matrix_b.columns[j])
+            product_matrix.elements[i][j] = Vector.dot_product(matrix_a.rows[i], matrix_b.columns[j])
 
     return product_matrix
 
@@ -138,10 +140,11 @@ if __name__ == '__main__':
 
     second_matrix = Matrix()
     print()
-    second_matrix.print_matrix()
-    print()
     new_matrix.print_matrix()
     print()
+    second_matrix.print_matrix()
+    print()
+    
     second_matrix.refresh_matrix()
     new_matrix.refresh_matrix()
     product_matrix = multiply_matrices(new_matrix, second_matrix)
