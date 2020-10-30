@@ -11,6 +11,7 @@ class Matrix:
             self.refresh_matrix()
         elif identity == True:
             print('creating identity matrix')
+            self.dimensions = dimensions
             self.create_identity_matrix()
         elif zero == True:
             self.dimensions = dimensions
@@ -118,6 +119,20 @@ class Matrix:
 #        for column in self.columns:
 #            print(column)
 
+#def invert_matrix(matrix):
+#    inverse_matrix = Matrix(dimensions=matrix.dimensions, zero=True)
+#    identity = Matrix(dimensions=matrix.dimensions, identity=True)
+#    
+#    
+#    for i in range(matrix.dimensions[0]):
+#        for j in range(matrix.dimensions[1]):
+#            
+#   
+#
+#    ## logic goes here using pivots to go row by row converting the zero matrix 'inverse_matrix' into the actual inverse.
+#    ## I might need to make temp vectors to hold values to avoid running into more issues related to the pass-by-reference nature of everything python
+#    ## answer to the temp issue...... temp_list = original_list[:]      any other way will create a reference to the variable.
+
 def define_matrix(elements):
     pass
 
@@ -128,24 +143,11 @@ def multiply_matrices(matrix_a, matrix_b):
     product_matrix = Matrix(dimensions=[len(matrix_a.rows), len(matrix_b.columns)], zero=True)
     
     for i in range(0, len(matrix_a.rows)):
-        print("working in ", matrix_a.rows[i])
         for j in range(0, len(matrix_b.columns)):
-            print("dotproduct calculation", matrix_a.rows[i], "*", matrix_b.columns[j])
             product_matrix.elements[i][j] = Vector.dot_product(matrix_a.rows[i], matrix_b.columns[j])
 
     return product_matrix
 
 if __name__ == '__main__':
     new_matrix = Matrix()
-
-    second_matrix = Matrix()
-    print()
-    new_matrix.print_matrix()
-    print()
-    second_matrix.print_matrix()
-    print()
-    
-    second_matrix.refresh_matrix()
     new_matrix.refresh_matrix()
-    product_matrix = multiply_matrices(new_matrix, second_matrix)
-    product_matrix.print_matrix()
